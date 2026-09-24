@@ -39,7 +39,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--data_path", type=str, default="./data/papers_output.json")
 parser.add_argument("--feature_path", type=str, default="./data/node_features.pkl")
 parser.add_argument("--bert_model", type=str, default="")
-parser.add_argument("--device", type=str, default="cuda:0" if torch.cuda.is_available() else "cpu")
+parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
 parser.add_argument("--seed", type=int, default=64)
 parser.add_argument("--output_dir", type=str, default="./outputs")
 parser.add_argument("--batch_size", type=int, default=1024)
@@ -270,12 +270,12 @@ print("Edge type to index mapping:", edge_type_to_idx)
 
 
 feature_dim = 768
-node_features = {{}}
+node_features = {}
 
 # Generate fixed BERT node features
 def get_bert_embedding(text, tokenizer, bert_model, max_length=64):
     inputs = tokenizer(text, return_tensors='pt', truncation=True, padding='max_length', max_length=max_length)
-    inputs = {{key: value.to(device) for key, value in inputs.items()}}
+    inputs = {key: value.to(device) for key, value in inputs.items()}
     with torch.no_grad():
         outputs = bert_model(**inputs)
     return outputs.last_hidden_state[:, 0, :].squeeze(0).cpu().numpy()
@@ -283,7 +283,7 @@ def get_bert_embedding(text, tokenizer, bert_model, max_length=64):
 if os.path.exists(args.feature_path):
     with open(args.feature_path, 'rb') as f:
         node_features = pickle.load(f)
-    print(f"Node features loaded from {{args.feature_path}}")
+    print(f"Node features loaded from {args.feature_path}")
 else:
     if not args.bert_model:
         raise ValueError("--bert_model is required when --feature_path does not exist")
@@ -296,7 +296,7 @@ else:
     os.makedirs(feature_dir, exist_ok=True)
     with open(args.feature_path, 'wb') as f:
         pickle.dump(node_features, f)
-    print(f"Node features saved to {{args.feature_path}}")
+    print(f"Node features saved to {args.feature_path}")
 
 
 # Map nodes to integer indices
