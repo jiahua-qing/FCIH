@@ -36,17 +36,14 @@ pip install -r requirements.txt
 ```text
 .
 ├── AAN/
-│   ├── data/
 │   ├── train_fcih.py
 │   └── run_multiseed.sh
 │
 ├── SemanticScholar/
-│   ├── data/
 │   ├── train_fcih.py
 │   └── run_multiseed.sh
 │
 ├── MOOCCube/
-│   ├── data/
 │   ├── train_fcih.py
 │   └── run_multiseed.sh
 │
@@ -64,33 +61,18 @@ If `--feature_path` points to an existing feature cache, the cached features are
 
 1. Place the dataset file in the corresponding `data/` directory, or provide its location with `--data_path`.
 
-Default dataset paths are:
 
-```text
-AAN/data/AAN.json
-SemanticScholar/data/Semantic.json
-MOOCCube/data/MOOC.json
-```
 
 2. Run training and evaluation. For example:
 
 ```bash
 cd AAN
-python train_fcih.py \
-  --data_path ./data/AAN.json \
-  --feature_path ./data/node_features.pkl \
-  --device cuda:0 \
-  --seed 64
-```
+python train_fcih.py 
 
 3. To run all ten seeds used in the experiments:
 
 ```bash
-bash run_multiseed.sh \
-  --data_path ./data/AAN.json \
-  --feature_path ./data/node_features.pkl \
-  --device cuda:0
-```
+bash run_multiseed.sh 
 
 
 ## 📊 Evaluation Metrics
