@@ -66,12 +66,12 @@ Node features are initialized using 768-dimensional `[CLS]` representations from
 ```bash
 cd AAN
 python train_fcih.py 
-
+```
 3. To run all ten seeds used in the experiments:
 
 ```bash
 bash run_multiseed.sh 
-
+```
 
 ## 📊 Evaluation Metrics
 
