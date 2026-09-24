@@ -55,8 +55,6 @@ pip install -r requirements.txt
 
 Node features are initialized using 768-dimensional `[CLS]` representations from the final hidden layer of pretrained BERT models. The feature generation code supports pretrained models such as `bert-base-uncased` and BERT-base Chinese, with a maximum input length of 64.
 
-If `--feature_path` points to an existing feature cache, the cached features are loaded directly. Otherwise, specify a pretrained BERT checkpoint or local model directory with `--bert_model` to generate and cache the node features.
-
 ## 🚀 Running the Model
 
 1. Place the dataset file in the corresponding `data/` directory, or provide its location with `--data_path`.
