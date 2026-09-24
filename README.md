@@ -67,9 +67,9 @@ If `--feature_path` points to an existing feature cache, the cached features are
 Default dataset paths are:
 
 ```text
-AAN/data/papers_output.json
-SemanticScholar/data/merged_2020_2024-2.json
-MOOCCube/data/integrated_user_course_teacher_school10.json
+AAN/data/AAN.json
+SemanticScholar/data/Semantic.json
+MOOCCube/data/MOOC.json
 ```
 
 2. Run training and evaluation. For example:
@@ -77,19 +77,8 @@ MOOCCube/data/integrated_user_course_teacher_school10.json
 ```bash
 cd AAN
 python train_fcih.py \
-  --data_path ./data/papers_output.json \
+  --data_path ./data/AAN.json \
   --feature_path ./data/node_features.pkl \
-  --device cuda:0 \
-  --seed 64
-```
-
-If a feature cache is not available, provide the BERT model path:
-
-```bash
-python train_fcih.py \
-  --data_path ./data/papers_output.json \
-  --feature_path ./data/node_features.pkl \
-  --bert_model /path/to/pretrained/bert \
   --device cuda:0 \
   --seed 64
 ```
@@ -98,12 +87,11 @@ python train_fcih.py \
 
 ```bash
 bash run_multiseed.sh \
-  --data_path ./data/papers_output.json \
+  --data_path ./data/AAN.json \
   --feature_path ./data/node_features.pkl \
   --device cuda:0
 ```
 
-The ten seeds are `64, 72, 80, 88, 96, 104, 112, 120, 128, 136`.
 
 ## 📊 Evaluation Metrics
 
